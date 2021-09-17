@@ -1,0 +1,187 @@
+<mvc:View xmlns:form="sap.ui.layout.form"
+    controllerName="com.sfc.formatter.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>Title}" >
+					<content>    
+                        <Panel headerText="Input Type">                  
+                            <f:SimpleForm   id="SimpleFormChangeColumn_twoGroups"
+                                            editable="true"
+                                            layout="ColumnLayout"
+                                            title="Personal"
+                                            columnsM="2"
+                                            columnsL="2"
+                                            columnsXL="2">
+                                <f:content>
+                                    <core:Title text="Information" />
+                                    <Label text="Input Type Number" />
+                                    <Input  type="Number"/>
+                                    <Label text="Input Type Email"/>
+                                    <Input  type="Password"/>
+                                </f:content> 
+                            </f:SimpleForm>
+                        </Panel>
+ 
+                        <Panel headerText="Text control formatter Test" class="sapUiTinyMarginTop">
+                            <VBox>     
+                                <HBox class="sapUiTinyMarginBegin">                        
+                                    <Label  text="Text formatter Type 1" />
+                                    <Text   id="textFormatter" text="{
+                                                path : '/CafeName',
+                                                formatter : '.fristUpperCaseFormatter'
+                                            }" 
+                                            class="sapUiTinyMarginBegin"/>
+                                </HBox>
+
+                                <HBox class="sapUiTinyMarginBegin" width="100%">                        
+                                    <Label  text="Text formatter Type 2" />
+                                    <Text   text="{
+                                                path : '/CafeName',
+                                                formatter : '.formatter.cfristUpperCaseFormatter'
+                                            }" 
+                                            class="sapUiTinyMarginBegin"/>
+                                </HBox>
+                            </VBox>
+                        </Panel>
+
+                        <Panel headerText="BindValue And Formatte"  class="sapUiTinyMarginTop">
+                            <VBox class="sapUiTinyMarginBegin" width="70%">                        
+                                <Label  text="Input type BindValue " />
+                                <Input  id="inputBindValue" type="Text" class="sapUiTinyMarginBegin"/>                          
+                            </VBox>                        
+                        </Panel>
+
+                       <Panel headerText="List Type And Formatter" class="sapUiTinyMarginTop">
+                            <List   headerText="{i18n>listTitle}"                                    
+                                    class="sapUiResponsiveMargin"
+                                    width="auto"
+                                    items="{/StudyType}"> 
+                                    <ObjectListItem
+                                        title="{title}" 
+                                        number="{path:'expenses', type:'sap.ui.model.type.Currency'}"                                        
+                                        >
+                                        <firstStatus>
+                                            <ObjectStatus   text="{
+                                                            path: 'status',
+                                                            formatter: '.formatter.statusText'
+                                            }"/>
+                                        </firstStatus>
+                                    </ObjectListItem>
+                            </List>                       
+                       </Panel>
+
+
+                       <Panel headerText="ObjectNumber And sap.ui.model.type.Currency" class="sapUiTinyMarginTop">
+                            <HBox>
+                                <VBox>
+                                    <Text text="Book Title:{/Books/0/Title}, Author:{/Books/0/Author}" />                       
+                                    <ObjectNumber
+                                        class="sapUiSmallMarginBottom"
+                                        binding="{/Books/0}" 
+                                        inverted="true"                               
+                                        number="{
+                                                parts:[{path:'Price'},{path:'CurrencyCode'}],
+                                                type: 'sap.ui.model.type.Currency',
+                                                formatOptions: {showMeasure: false}
+                                            }"
+                                        unit="{CurrencyCode}"                                    
+                                        state="{State}" />
+                                </VBox>
+
+                                <VBox class="sapUiTinyMarginBegin">
+                                    <Text text="Book Title:{/Books/1/Title}, Author:{/Books/1/Author}" />                       
+                                    <ObjectNumber
+                                        class="sapUiSmallMarginBottom"
+                                        binding="{/Books/1}" 
+                                        active="true"                          
+                                        number="{
+                                                parts:[{path:'Price'},{path:'CurrencyCode'}],
+                                                type: 'sap.ui.model.type.Currency',
+                                                formatOptions: {showMeasure: false}
+                                            }"
+                                        unit="{CurrencyCode}"                                    
+                                        state="{State}" />
+                                </VBox>
+
+                                <VBox class="sapUiTinyMarginBegin">
+                                    <Text text="Book Title:{/Books/2/Title}, Author:{/Books/2/Author}" />                       
+                                    <ObjectNumber
+                                        class="sapUiSmallMarginBottom"
+                                        binding="{/Books/2}" 
+                                        active="true"
+                                        inverted="true"                          
+                                        number="{
+                                                parts:[{path:'Price'},{path:'CurrencyCode'}],
+                                                type: 'sap.ui.model.type.Currency',
+                                                formatOptions: {showMeasure: false}
+                                            }"
+                                        unit="{CurrencyCode}"                                    
+                                        state="{State}" />
+                                </VBox>                               
+				
+                            </HBox>                            
+                       </Panel> 
+
+                        <Panel headerText="Code: Date Type - Source As Date">
+                            <VBox>
+                                <HBox>
+                                    <Label text="Date" class="sapUiSmallMarginTop"/>
+                                    <DatePicker dateValue="{/_data/date}"  class="sapUiTinyMarginBegin"/>
+                                </HBox>    
+                                <HBox>
+                                    <Label text="Short {
+                                        path: '/_data/date',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            style: 'short'
+                                        }
+                                    }" class="sapUiSmallMarginTop"/>
+                                   
+                                </HBox>  
+                                <HBox>
+                                    <Label text="Medium {
+                                        path: '/_data/date',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            style: 'medium'
+                                        }
+                                    }" class="sapUiSmallMarginTop"/>                                   
+                                </HBox>  
+                                <HBox>
+                                    <Label text="Long {
+                                        path: '/_data/date',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            style: 'long'
+                                        }
+                                    }" class="sapUiSmallMarginTop"/>
+                                   
+                                </HBox>  
+                                <HBox>
+                                    <Label text="Full {
+                                        path: '/_data/date',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            style: 'full'
+                                        }
+                                    }" class="sapUiSmallMarginTop"/>
+                                   
+                                </HBox>  
+                            </VBox>
+                        </Panel>
+
+
+
+                    </content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
